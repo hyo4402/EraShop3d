@@ -56,12 +56,7 @@ const DRIVE_API_KEY = "AIzaSyARfCFEnAPYnXzb9AIjiD53jgn0ZyL_80Y";
 // Fallback khi không có ?id= hoặc lỗi load
 const DEFAULT_CONFIG = {
   texts: ["Happy Valentine 2026","Thanks u coming","Love u","05.10.2025","𓇼","𓆝","⋆","˚"],
-  imageUrls: [
-    "assets/image (1).jpg","assets/image (2).jpg","assets/image (3).jpg",
-    "assets/image (4).jpg","assets/image (5).jpg","assets/image (6).jpg",
-    "assets/image (7).jpg","assets/image (8).jpg","assets/image (9).jpg",
-    "assets/image (10).jpg","assets/image (11).jpg"
-  ],
+  imageUrls: [], // không dùng ảnh fallback
   musicUrl: "assets/music.mp3",
 };
 
@@ -151,8 +146,14 @@ function extractDriveId(input) {
 }
 
 function buildDriveFileUrl(input) {
+  // Nếu là Drive URL bất kỳ → extract ID → build download URL
+  if (input.includes('drive.google.com') || input.includes('docs.google.com')) {
+    return `https://drive.google.com/uc?export=download&id=${extractDriveId(input)}`;
+  }
+  // URL khác (direct link) → dùng thẳng
   if (input.startsWith('http')) return input;
-  return `https://drive.google.com/uc?export=download&id=${extractDriveId(input)}`;
+  // Chỉ là file ID
+  return `https://drive.google.com/uc?export=download&id=${input}`;
 }
 
 // Parser CSV đơn giản (xử lý được dấu phẩy trong ngoặc kép)
