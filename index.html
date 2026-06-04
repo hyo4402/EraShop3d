@@ -117,7 +117,10 @@ async function loadConfig() {
 function applyConfig(cfg) {
   CONFIG = cfg;
   // Set nguồn nhạc
-  document.getElementById('bgMusic').src = cfg.musicUrl;
+  const audioEl = document.getElementById('bgMusic');
+  audioEl.src = cfg.musicUrl;
+  audioEl.load();
+  console.log('[Music] src:', cfg.musicUrl);
   // Thông báo cho các hàm đang chờ
   _cfgQueue.forEach(cb => cb(cfg));
   _cfgQueue.length = 0;
