@@ -121,6 +121,8 @@ function applyConfig(cfg) {
   audioEl.src = cfg.musicUrl;
   audioEl.load();
   console.log('[Music] src:', cfg.musicUrl);
+  audioEl.addEventListener('canplay', () => console.log('[Music] ready'));
+  audioEl.addEventListener('error', (e) => console.error('[Music] error:', audioEl.error?.code, audioEl.error?.message));
   // Thông báo cho các hàm đang chờ
   _cfgQueue.forEach(cb => cb(cfg));
   _cfgQueue.length = 0;
