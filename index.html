@@ -153,7 +153,7 @@ function extractDriveId(input) {
 function buildDriveFileUrl(input) {
   // Nếu là Drive URL bất kỳ → extract ID → build download URL
   if (input.includes('drive.google.com') || input.includes('docs.google.com')) {
-    return `https://drive.google.com/uc?id=${extractDriveId(input)}`;
+    return `https://drive.google.com/uc?id=${extractDriveId(input)}&export=download&confirm=t`;
   }
   // URL khác (direct link) → dùng thẳng
   if (input.startsWith('http')) return input;
