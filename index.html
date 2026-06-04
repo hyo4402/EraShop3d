@@ -102,7 +102,7 @@ async function loadConfig() {
     if (row.drive_folder_id && DRIVE_API_KEY) {
       const fileIds = await getDriveFolderImageIds(row.drive_folder_id.trim());
       if (fileIds.length > 0)
-        imageUrls = fileIds.map(fid => `https://drive.google.com/thumbnail?id=${fid}&sz=w800`);
+        imageUrls = fileIds.map(fid => `https://lh3.googleusercontent.com/d/${fid}=w800`);
     }
 
     // 4. Music (Drive file ID hoặc URL trực tiếp)
