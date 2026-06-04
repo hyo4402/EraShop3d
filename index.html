@@ -419,10 +419,11 @@ window.addEventListener("resize", () => {
     }
   });
   document.addEventListener("selectstart", e => e.preventDefault());
-  setInterval(() => {
-    const s = Date.now(); debugger;
-    if (Date.now() - s > 100) window.location.reload();
-  }, 1000);
+  // debugger trap tạm tắt để debug
+  // setInterval(() => {
+  //   const s = Date.now(); debugger;
+  //   if (Date.now() - s > 100) window.location.reload();
+  // }, 1000);
 </script>
 </body>
 </html>
