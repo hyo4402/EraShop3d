@@ -131,13 +131,17 @@ function applyConfig(cfg) {
 // Gọi Drive API lấy danh sách file ảnh trong folder
 async function getDriveFolderImageIds(rawInput) {
   const folderId = extractDriveId(rawInput);
+  console.log('[Drive] folder ID extracted:', folderId);
   const url = 'https://www.googleapis.com/drive/v3/files'
     + `?q=%27${folderId}%27+in+parents+and+mimeType+contains+%27image%2F%27`
     + `&fields=files(id%2Cname)&orderBy=name&key=${DRIVE_API_KEY}`;
   const res  = await fetch(url);
   const data = await res.json();
+  console.log('[Drive] API response:', data);
   if (data.error) throw new Error(data.error.message);
-  return (data.files || []).map(f => f.id);
+  const ids = (data.files || []).map(f => f.id);
+  console.log('[Drive] image count:', ids.length);
+  return ids;
 }
 
 // Nhận cả ID thuần và URL đầy đủ của Drive
